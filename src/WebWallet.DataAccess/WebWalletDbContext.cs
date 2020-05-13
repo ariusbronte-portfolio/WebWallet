@@ -1,4 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using WebWallet.DataAccess.Configurations;
+using WebWallet.Domain.Entites;
 
 namespace WebWallet.DataAccess
 {
@@ -8,10 +10,12 @@ namespace WebWallet.DataAccess
         {
         }
 
+        public DbSet<UserEntity> Users { get; set; }
         
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
+            builder.ApplyConfiguration(new UserEntityConfiguration());
         }
     }
 }
