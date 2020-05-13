@@ -8,5 +8,14 @@
     <Folder Include="Controllers" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\WebWallet.Abstractions\WebWallet.Abstractions.csproj" />
+    <ProjectReference Include="..\WebWallet.Application\WebWallet.Application.csproj" />
+    <ProjectReference Include="..\WebWallet.BusinessLogic\WebWallet.BusinessLogic.csproj" />
+    <ProjectReference Include="..\WebWallet.DataAccess\WebWallet.DataAccess.csproj" />
+    <ProjectReference Include="..\WebWallet.Domain\WebWallet.Domain.csproj" />
+    <ProjectReference Include="..\WebWallet.Implementations\WebWallet.Implementations.csproj" />
+  </ItemGroup>
+
 
 </Project>
