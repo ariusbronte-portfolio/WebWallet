@@ -5,6 +5,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using WebWallet.DataAccess;
+using WebWallet.DataAccess.Extensions;
 
 namespace WebWallet.WebApi
 {
@@ -27,13 +29,17 @@ namespace WebWallet.WebApi
             _configuration = configuration ?? throw new ArgumentNullException(nameof(configuration));
         }
 
-
         /// <summary>
         ///     This method gets called by the runtime. Use this method to add services to the container.
         /// </summary>
         /// <param name="services">Defines a contract for a collection of service descriptors.</param>
         public void ConfigureServices(IServiceCollection services)
         {
+            // Register database
+            var connectionString = _configuration.GetConnectionString("Default");
+            var migrationsAssembly = typeof(WebWalletDbContext).Assembly.FullName;
+            services.AddDbContext(connectionString, migrationsAssembly);
+            
             services.AddControllers();
         }
 
