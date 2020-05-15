@@ -1,4 +1,5 @@
 using System;
+using Hellang.Middleware.ProblemDetails;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -49,6 +50,7 @@ namespace WebWallet.WebApi
             
             // Register the Swagger generator
             services.AddSwaggerGenerator();
+            services.AddHellangProblemDetails();
             services.AddControllers();
         }
 
@@ -81,6 +83,7 @@ namespace WebWallet.WebApi
                 app.UseDeveloperExceptionPage();
             }
 
+            app.UseProblemDetails();
             app.UseHttpsRedirection();
             app.UseRouting();
             app.UseAuthorization();
