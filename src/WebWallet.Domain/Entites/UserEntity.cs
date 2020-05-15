@@ -18,7 +18,7 @@ namespace WebWallet.Domain.Entites
         /// <summary>
         ///     Default values for creating a record in the database.
         /// </summary>
-        private UserEntity()
+        public UserEntity()
         {
             CreationHistory = DateTimeOffset.UtcNow;
         }
