@@ -88,6 +88,13 @@ namespace WebWallet.WebApi
                 app.UseDeveloperExceptionPage();
             }
 
+            app.UseCors(builder =>
+            {
+                builder.AllowAnyHeader();
+                builder.AllowAnyMethod();
+                builder.AllowAnyOrigin();
+            });
+            
             app.UseProblemDetails();
             app.UseHttpsRedirection();
             app.UseRouting();
