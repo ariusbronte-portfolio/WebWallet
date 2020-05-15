@@ -10,6 +10,7 @@
     <ProjectReference Include="..\WebWallet.Application\WebWallet.Application.csproj" />
     <ProjectReference Include="..\WebWallet.DataAccess\WebWallet.DataAccess.csproj" />
     <ProjectReference Include="..\WebWallet.Domain\WebWallet.Domain.csproj" />
+    <ProjectReference Include="..\WebWallet.Infrastructure\WebWallet.Infrastructure.csproj" />
   </ItemGroup>
 
   <ItemGroup>

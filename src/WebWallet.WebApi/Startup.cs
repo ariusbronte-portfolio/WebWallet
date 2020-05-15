@@ -7,6 +7,8 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using WebWallet.DataAccess;
 using WebWallet.DataAccess.Extensions;
+using WebWallet.Infrastructure.Abstractions;
+using WebWallet.Infrastructure.EcbEuropa;
 using WebWallet.WebApi.Extensions;
 
 namespace WebWallet.WebApi
@@ -40,6 +42,10 @@ namespace WebWallet.WebApi
             var connectionString = _configuration.GetConnectionString("Default");
             var migrationsAssembly = typeof(WebWalletDbContext).Assembly.FullName;
             services.AddDbContext(connectionString, migrationsAssembly);
+            services.AddHttpClient<IEcuEuropa, EcuEuropa>(client =>
+            {
+                client.BaseAddress = new Uri("https://www.ecb.europa.eu/");
+            });
             
             // Register the Swagger generator
             services.AddSwaggerGenerator();
