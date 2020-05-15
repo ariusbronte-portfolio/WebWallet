@@ -7,6 +7,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using WebWallet.DataAccess;
 using WebWallet.DataAccess.Extensions;
+using WebWallet.WebApi.Extensions;
 
 namespace WebWallet.WebApi
 {
@@ -40,6 +41,8 @@ namespace WebWallet.WebApi
             var migrationsAssembly = typeof(WebWalletDbContext).Assembly.FullName;
             services.AddDbContext(connectionString, migrationsAssembly);
             
+            // Register the Swagger generator
+            services.AddSwaggerGenerator();
             services.AddControllers();
         }
 
@@ -59,6 +62,16 @@ namespace WebWallet.WebApi
         {
             if (env.IsDevelopment())
             {
+                // Middleware to serve generated Swagger as a JSON endpoint.
+                app.UseSwagger();
+
+                // Enable middleware to serve swagger-ui (HTML, JS, CSS, etc.),
+                // specifying the Swagger JSON endpoint.
+                app.UseSwaggerUI(c =>
+                {
+                    c.SwaggerEndpoint("/swagger/v1/swagger.json", "WebWalletV1");
+                });
+                
                 app.UseDeveloperExceptionPage();
             }
 
