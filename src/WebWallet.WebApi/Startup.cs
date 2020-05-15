@@ -1,11 +1,13 @@
 using System;
 using Hellang.Middleware.ProblemDetails;
+using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using WebWallet.Application.Wallet.Queries.Balance;
 using WebWallet.DataAccess;
 using WebWallet.DataAccess.Extensions;
 using WebWallet.Infrastructure.Abstractions;
@@ -43,6 +45,9 @@ namespace WebWallet.WebApi
             var connectionString = _configuration.GetConnectionString("Default");
             var migrationsAssembly = typeof(WebWalletDbContext).Assembly.FullName;
             services.AddDbContext(connectionString, migrationsAssembly);
+
+            services.AddMediatR(typeof(BalanceQueryHandler));
+            
             services.AddHttpClient<IEcuEuropa, EcuEuropa>(client =>
             {
                 client.BaseAddress = new Uri("https://www.ecb.europa.eu/");
