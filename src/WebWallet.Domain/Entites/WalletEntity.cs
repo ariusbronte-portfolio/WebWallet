@@ -54,6 +54,28 @@ namespace WebWallet.Domain.Entites
         {
             Balance = balance;
         }
+
+        /// <summary>
+        ///     Adds the balance of user.
+        /// </summary>
+        /// <param name="balance">The amount to add to user's balance.</param>
+        /// <exception cref="ArgumentOutOfRangeException">Thrown if balance is negative or equal zero.</exception>
+        public void AddBalance(decimal balance)
+        {
+            if (balance <= 0) throw new ArgumentOutOfRangeException(nameof(balance));
+            Balance += balance;
+        }
+
+        /// <summary>
+        ///     Subtracts the balance of user
+        /// </summary>
+        /// <param name="balance">The amount to subtract to user's balance.</param>
+        /// <exception cref="ArgumentOutOfRangeException">Thrown if balance is negative or equal zero.</exception>
+        public void SubtractBalance(decimal balance)
+        {
+            if (balance <= 0) throw new ArgumentOutOfRangeException(nameof(balance));
+            Balance -= balance;
+        }
         
         /// <summary>
         ///     Gets the currency of balance.
@@ -95,7 +117,7 @@ namespace WebWallet.Domain.Entites
         /// <param name="userEntity">The essence of the user.</param>
         public void SetUserEntity(UserEntity userEntity)
         {
-            UserEntity = userEntity ?? throw new ArgumentNullException(paramName: nameof(userEntity));
+            UserEntity = userEntity ?? throw new ArgumentNullException(nameof(userEntity));
             if (userEntity.Id >= 0) UserEntityId = userEntity.Id;
         }
     }
